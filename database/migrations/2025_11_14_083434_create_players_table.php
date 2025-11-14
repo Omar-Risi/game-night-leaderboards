@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('gutech_id');
-            $table->integer('total_score');
+            $table->integer('total_score')->default(0);
             $table->timestamps();
         });
     }
