@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Minigame extends Model
 {
     protected $fillable = [
-        'name',
+        'minigame',
         'score'
     ];
 }

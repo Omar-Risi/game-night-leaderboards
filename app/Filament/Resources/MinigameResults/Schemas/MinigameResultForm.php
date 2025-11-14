@@ -1,0 +1,28 @@
+<?php
+
+namespace App\Filament\Resources\MinigameResults\Schemas;
+
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+class MinigameResultForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Select::make('player_id')
+                    ->relationship('player', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
+                Select::make('minigame_id')
+                    ->relationship('minigame', 'id')
+                    ->required(),
+                TextInput::make('score')
+                    ->required()
+                    ->numeric(),
+            ]);
+    }
+}
