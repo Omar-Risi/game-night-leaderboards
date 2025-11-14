@@ -1,21 +1,13 @@
 import { Head } from '@inertiajs/react';
 import { Trophy, Star, Crown } from 'lucide-react';
-import { useState } from 'react';
 
-export default function Welcome() {
-    // Sample leaderboard data
-    const [leaderboardData] = useState([
-        { position: 1, username: "PixelMaster99", score: 15420 },
-        { position: 2, username: "RetroGamer", score: 14890 },
-        { position: 3, username: "NeonDreamer", score: 13650 },
-        { position: 4, username: "CyberWarrior", score: 12340 },
-        { position: 5, username: "RadicalDude", score: 11200 },
-        { position: 6, username: "VaporWave", score: 10850 },
-        { position: 7, username: "GroovyPlayer", score: 9920 },
-        { position: 8, username: "TotallyAwesome", score: 9450 },
-        { position: 9, username: "BoomBoxHero", score: 8760 },
-        { position: 10, username: "FunkyFresh", score: 8230 },
-    ]);
+export default function Welcome({ players = [] }) {
+    // Transform players data into leaderboard format
+    const leaderboardData = players.map((player, index) => ({
+        position: index + 1,
+        username: player.name || player.username || 'Unknown Player',
+        score: player.total_score || 0
+    }));
 
     const getPositionBadge = (position) => {
         switch (position) {
@@ -72,30 +64,36 @@ export default function Welcome() {
 
                         {/* Table Body */}
                         <div className="divide-y-4 divide-purple-300">
-                            {leaderboardData.map((player) => (
-                                <div
-                                    key={player.position}
-                                    className={`grid grid-cols-12 gap-4 p-4 items-center transition-all ${getRowStyle(player.position)}`}
-                                >
-                                    {/* Position */}
-                                    <div className="col-span-2 flex items-center justify-center gap-2">
-                                        {getPositionBadge(player.position)}
-                                        <span className="text-2xl font-bold">#{player.position}</span>
-                                    </div>
+                            {leaderboardData.length > 0 ? (
+                                leaderboardData.map((player) => (
+                                    <div
+                                        key={player.position}
+                                        className={`grid grid-cols-12 gap-4 p-4 items-center transition-all ${getRowStyle(player.position)}`}
+                                    >
+                                        {/* Position */}
+                                        <div className="col-span-2 flex items-center justify-center gap-2">
+                                            {getPositionBadge(player.position)}
+                                            <span className="text-2xl font-bold">#{player.position}</span>
+                                        </div>
 
-                                    {/* Username */}
-                                    <div className="col-span-6">
-                                        <span className="text-xl font-semibold">{player.username}</span>
-                                    </div>
+                                        {/* Username */}
+                                        <div className="col-span-6">
+                                            <span className="text-xl font-semibold">{player.username}</span>
+                                        </div>
 
-                                    {/* Score */}
-                                    <div className="col-span-4 text-right">
-                                        <span className="text-2xl font-bold bg-white bg-opacity-50 px-4 py-1 rounded-full">
-                                            {player.score.toLocaleString()}
-                                        </span>
+                                        {/* Score */}
+                                        <div className="col-span-4 text-right">
+                                            <span className="text-2xl font-bold bg-white bg-opacity-50 px-4 py-1 rounded-full">
+                                                {player.score.toLocaleString()}
+                                            </span>
+                                        </div>
                                     </div>
+                                ))
+                            ) : (
+                                <div className="p-8 text-center text-gray-500">
+                                    <p className="text-xl">No players yet! Be the first to join the leaderboard! 🎮</p>
                                 </div>
-                            ))}
+                            )}
                         </div>
                     </div>
 
