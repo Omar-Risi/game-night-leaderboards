@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\PlayerMinigameResultObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
+#[ObservedBy([PlayerMinigameResultObserver::class])]
 class MinigameResult extends Model
 {
 

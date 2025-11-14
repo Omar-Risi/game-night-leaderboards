@@ -16,7 +16,7 @@ class Player extends Model
 
     public function results() :HasMany
     {
-        return $this->hasMany(PlayerMinigameResult::class);
+        return $this->hasMany(MinigameResult::class);
     }
 
     public function getTotalPointsAttribute()
