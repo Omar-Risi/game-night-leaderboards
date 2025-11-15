@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('welcome', ['players' => Player::orderByDesc('total_points')->take(15)->get()]);
+    return Inertia::render('welcome', ['players' => Player::orderByDesc('total_score')->take(15)->get()]);
 })->name('home');
 
 Route::get('/signup', function () {
