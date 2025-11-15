@@ -77,11 +77,21 @@ autostart=true
 autorestart=true
 stopasgroup=true
 killasgroup=true
-numprocs=12 # To reduce memory/CPU usage, change to 2.
+numprocs=12
 startsecs=0
 stopwaitsecs=3600
 stdout_logfile=/var/log/worker-laravel.log
 stderr_logfile=/var/log/worker-laravel.log
+'''
+
+"worker-inertia-ssr.conf" = '''
+[program:inertia-ssr]
+process_name=%(program_name)s_%(process_num)02d
+command=bash -c 'exec php /app/artisan inertia:start-ssr'
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/worker-inertia-ssr.log
+stdout_logfile=/var/log/worker-inertia-ssr.log
 '''
 
 "php-fpm.conf" = '''
@@ -109,7 +119,7 @@ daemon off;
 worker_rlimit_nofile 8192;
 
 events {
-  worker_connections  4096;  # Default: 1024
+  worker_connections  4096;
 }
 
 http {
@@ -124,7 +134,7 @@ http {
     error_log /var/log/nginx-error.log;
     sendfile     on;
     tcp_nopush   on;
-    server_names_hash_bucket_size 128; # this seems to be required for some vhosts
+    server_names_hash_bucket_size 128;
 
     server {
         listen ${PORT};
@@ -165,6 +175,7 @@ http {
 
         location ~ \.php$ {
             fastcgi_pass 127.0.0.1:9000;
+            fastcgi_buffer_size 8k;
             fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
             include $!{nginx}/conf/fastcgi_params;
             include $!{nginx}/conf/fastcgi.conf;
