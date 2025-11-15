@@ -39,7 +39,7 @@ export default function Welcome({ players = [] }) {
                 <main className="max-w-4xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-8">
-                        <h1 className="text-6xl font-bold text-white mb-2 drop-shadow-lg" style={{
+                        <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg" style={{
                             textShadow: '4px 4px 0px rgba(255,0,255,0.5), 8px 8px 0px rgba(0,255,255,0.5)'
                         }}>
                             LEADERBOARDS
