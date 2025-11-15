@@ -12,8 +12,7 @@ export default function Signup() {
         post('/api/signup', {
             onSuccess: () => {
                 alert('We got your information happy gaming!');
-
-                setTimeout(() => window.location = "/", 2000)
+                window.location = "/";
             },
         });
     };
