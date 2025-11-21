@@ -18,7 +18,7 @@ class MinigameResultForm
                     ->preload()
                     ->required(),
                 Select::make('minigame_id')
-                    ->relationship('minigame', 'id')
+                    ->relationship('minigame', 'minigame')
                     ->required(),
                 TextInput::make('score')
                     ->required()
