@@ -4,7 +4,9 @@ import { UserPlus, Gamepad2 } from 'lucide-react';
 export default function Signup() {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
-        gutech_id: '',
+        gutech_email: '',
+        phone_number: '',
+        user_name: '',
     });
 
     const handleSubmit = (e) => {
@@ -23,6 +25,7 @@ export default function Signup() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
+
             <div className="min-h-screen bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 py-12 px-4 flex items-center justify-center">
                 <main className="max-w-md w-full">
                     {/* Header */}
@@ -75,23 +78,65 @@ export default function Signup() {
                                 )}
                             </div>
 
-                            {/* GUTech ID Field */}
+                            {/* GUTech Email Field */}
                             <div>
-                                <label htmlFor="gutech_id" className="block text-purple-900 font-bold text-lg mb-2">
-                                    GUTECH ID
+                                <label htmlFor="gutech_email" className="block text-purple-900 font-bold text-lg mb-2">
+                                    GUTECH EMAIL
+                                </label>
+                                <input
+                                    type="email"
+                                    id="gutech_email"
+                                    value={data.gutech_email}
+                                    onChange={(e) => setData('gutech_email', e.target.value)}
+                                    className="w-full px-4 py-3 text-lg border-4 border-purple-400 rounded-lg focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-300 transition-all"
+                                    placeholder="your.email@gutech.edu.om"
+                                    required
+                                />
+                                {errors.gutech_email && (
+                                    <p className="mt-2 text-red-600 font-semibold">
+                                        ⚠️ {errors.gutech_email}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Phone Number Field */}
+                            <div>
+                                <label htmlFor="phone_number" className="block text-purple-900 font-bold text-lg mb-2">
+                                    PHONE NUMBER
+                                </label>
+                                <input
+                                    type="tel"
+                                    id="phone_number"
+                                    value={data.phone_number}
+                                    onChange={(e) => setData('phone_number', e.target.value)}
+                                    className="w-full px-4 py-3 text-lg border-4 border-purple-400 rounded-lg focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-300 transition-all"
+                                    placeholder="+968 XXXX XXXX"
+                                    required
+                                />
+                                {errors.phone_number && (
+                                    <p className="mt-2 text-red-600 font-semibold">
+                                        ⚠️ {errors.phone_number}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Username Field */}
+                            <div>
+                                <label htmlFor="user_name" className="block text-purple-900 font-bold text-lg mb-2">
+                                    GAMER TAG
                                 </label>
                                 <input
                                     type="text"
-                                    id="gutech_id"
-                                    value={data.gutech_id}
-                                    onChange={(e) => setData('gutech_id', e.target.value)}
+                                    id="user_name"
+                                    value={data.user_name}
+                                    onChange={(e) => setData('user_name', e.target.value)}
                                     className="w-full px-4 py-3 text-lg border-4 border-purple-400 rounded-lg focus:outline-none focus:border-pink-500 focus:ring-4 focus:ring-pink-300 transition-all"
-                                    placeholder="Enter your GUTech ID"
+                                    placeholder="Choose your gamer tag"
                                     required
                                 />
-                                {errors.gutech_id && (
+                                {errors.user_name && (
                                     <p className="mt-2 text-red-600 font-semibold">
-                                        ⚠️ {errors.gutech_id}
+                                        ⚠️ {errors.user_name}
                                     </p>
                                 )}
                             </div>

@@ -14,10 +14,11 @@ Route::get('/signup', function () {
 })->name('signup');
 
 Route::post('/api/signup', function (Request $request) {
-
     $validated = $request->validate([
         'name' => ['string','required'],
-        'gutech_id' => ['string','required'],
+        'phone_number' => ['string','required'],
+        'user_name' => ['string','required'],
+        'gutech_email' => ['string','required'],
     ]);
 
     Player::create($validated);

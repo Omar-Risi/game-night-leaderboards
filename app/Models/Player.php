@@ -10,11 +10,13 @@ class Player extends Model
     //
     protected $fillable = [
         'name',
-        'gutech_id',
+        'gutech_email',
+        'user_name',
+        'phone_number',
         'total_score'
     ];
 
-    public function results() :HasMany
+    public function results(): HasMany
     {
         return $this->hasMany(MinigameResult::class);
     }

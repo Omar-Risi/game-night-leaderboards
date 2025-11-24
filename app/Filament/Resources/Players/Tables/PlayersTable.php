@@ -15,7 +15,9 @@ class PlayersTable
         return $table
             ->columns([
                 TextColumn::make('name')->label('Player Name'),
-                TextColumn::make('gutech_id'),
+                TextColumn::make('gutech_email'),
+                TextColumn::make('user_name'),
+                TextColumn::make('phone_number'),
                 TextColumn::make('total_score')->label('score'),
             ])
             ->filters([

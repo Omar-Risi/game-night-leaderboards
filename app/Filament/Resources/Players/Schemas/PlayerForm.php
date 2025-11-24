@@ -15,7 +15,9 @@ class PlayerForm
 
                 Fieldset::make('Player information')->schema([
                     TextInput::make("name")->label('Player Name')->placeholder('Omar Al Reesi')->columnSpanFull()->required(),
-                    TextInput::make("gutech_id")->label('Gutech Id')->placeholder('25-xxxx')->columnSpanFull()->required(),
+                    TextInput::make("user_name")->label('Player Name')->placeholder('Omar Al Reesi')->columnSpanFull()->required(),
+                    TextInput::make("phone_number")->label('Player Name')->placeholder('Omar Al Reesi')->columnSpanFull()->required(),
+                    TextInput::make("gutech_email")->label('Gutech Id')->placeholder('25-xxxx')->columnSpanFull()->required(),
                 ])->columnSpanFull()
             ]);
     }
