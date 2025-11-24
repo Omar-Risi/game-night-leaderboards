@@ -5,7 +5,7 @@ export default function Welcome({ players = [] }) {
     // Transform players data into leaderboard format
     const leaderboardData = players.map((player, index) => ({
         position: index + 1,
-        username: player.name || player.username || 'Unknown Player',
+        username: player.user_name || 'Unknown Player',
         score: player.total_score || 0
     }));
 
