@@ -13,7 +13,7 @@ class MinigameResultForm
         return $schema
             ->components([
                 Select::make('player_id')
-                    ->relationship('player', 'name')
+                    ->relationship('user_name', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
