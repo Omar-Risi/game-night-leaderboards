@@ -1,10 +1,13 @@
-import { Head } from '@inertiajs/react';
-import { Trophy, Star, Crown } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
+import { Trophy, Star, Crown, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function Welcome({ players = [] }) {
+export default function Welcome({ players }) {
+    const playersData = players.data || [];
+    const { current_page, last_page, from } = players;
+
     // Transform players data into leaderboard format
-    const leaderboardData = players.map((player, index) => ({
-        position: index + 1,
+    const leaderboardData = playersData.map((player, index) => ({
+        position: (from || 0) + index,
         username: player.user_name || 'Unknown Player',
         score: player.total_score || 0
     }));
@@ -96,6 +99,49 @@ export default function Welcome({ players = [] }) {
                             )}
                         </div>
                     </div>
+
+                    {/* Pagination Controls */}
+                    {last_page > 1 && (
+                        <div className="mt-8 flex justify-center items-center gap-4">
+                            <Link
+                                href={`/?page=${current_page - 1}`}
+                                preserveScroll
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-lg border-4 transition-all ${
+                                    current_page === 1
+                                        ? 'bg-gray-400 border-gray-500 text-gray-600 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-yellow-400 to-orange-500 border-purple-600 text-purple-900 hover:from-yellow-300 hover:to-orange-400 active:scale-95 shadow-lg'
+                                }`}
+                                style={current_page !== 1 ? { boxShadow: '6px 6px 0px rgba(0,0,0,0.3)' } : {}}
+                                disabled={current_page === 1}
+                            >
+                                <ChevronLeft className="w-5 h-5" />
+                                PREV
+                            </Link>
+
+                            <div className="bg-white px-8 py-3 rounded-lg border-4 border-purple-600 shadow-lg" style={{
+                                boxShadow: '6px 6px 0px rgba(0,0,0,0.3)'
+                            }}>
+                                <span className="text-purple-900 font-bold text-xl">
+                                    Page {current_page} of {last_page}
+                                </span>
+                            </div>
+
+                            <Link
+                                href={`/?page=${current_page + 1}`}
+                                preserveScroll
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-lg border-4 transition-all ${
+                                    current_page === last_page
+                                        ? 'bg-gray-400 border-gray-500 text-gray-600 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-yellow-400 to-orange-500 border-purple-600 text-purple-900 hover:from-yellow-300 hover:to-orange-400 active:scale-95 shadow-lg'
+                                }`}
+                                style={current_page !== last_page ? { boxShadow: '6px 6px 0px rgba(0,0,0,0.3)' } : {}}
+                                disabled={current_page === last_page}
+                            >
+                                NEXT
+                                <ChevronRight className="w-5 h-5" />
+                            </Link>
+                        </div>
+                    )}
 
                     {/* Footer Message */}
                     <div className="mt-8 text-center">
